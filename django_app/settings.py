@@ -12,12 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
-import environ
+import os
 import sys
 import dj_database_url
 
-env = environ.Env()
-environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,19 +25,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET", default=get_random_secret_key())
+SECRET_KEY = os.environ.get("SECRET", default=get_random_secret_key())
 
 # DEVELOPMENT MODE: set to True to enable development mode
 # This will allow you to use the sqlite3 database for development.
 
-DEVELOPMENT_MODE = env("DEVELOPMENT", default="False") == "True"
+DEVELOPMENT_MODE = os.environ.get("DEVELOPMENT", default="False") == "True"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG", default="False") == "True"
+DEBUG = os.environ.get("DEBUG", default="False") == "True"
 
 
-ALLOWED_HOSTS = env(
+ALLOWED_HOSTS = os.environ.get(
     'ALLOWED_HOSTS', default="localhost, 127.0.0.1").split(', ')
 
 
@@ -96,10 +94,10 @@ if DEVELOPMENT_MODE is True:
         }
     }
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if env("DATABASE_URL", None) is None:
+    if os.environ.get("DATABASE_URL", None) is None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
-        "default": dj_database_url.parse(env("DATABASE_URL")),
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
 # Password validation
