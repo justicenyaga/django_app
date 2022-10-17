@@ -25,20 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET", default=get_random_secret_key())
+SECRET_KEY = os.environ.get("SECRET", get_random_secret_key())
 
 # DEVELOPMENT MODE: set to True to enable development mode
 # This will allow you to use the sqlite3 database for development.
 
-DEVELOPMENT_MODE = os.environ.get("DEVELOPMENT", default="False") == "True"
+DEVELOPMENT_MODE = os.environ.get("DEVELOPMENT", "False") == "True"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", default="False") == "True"
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 
 ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS', default="localhost, 127.0.0.1").split(', ')
+    'ALLOWED_HOSTS', "localhost, 127.0.0.1").split(', ')
 
 
 # Application definition
