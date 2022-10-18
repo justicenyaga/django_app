@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET", get_random_secret_key())
 # DEVELOPMENT MODE: set to True to enable development mode
 # This will allow you to use the sqlite3 database for development.
 
-DEVELOPMENT_MODE = os.environ.get("DEVELOPMENT", "False") == "True"
+DEVELOPMENT_MODE = os.environ.get("DEVELOPMENT_MODE", "False") == "True"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
